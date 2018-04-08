@@ -9,10 +9,6 @@ machine:
         ANDROID_HOME: /usr/local/android-sdk-linux
         ADB_INSTALL_TIMEOUT: 240
         
-#checkout:
-    #post:
-        #- sudo cp -r licenses/. $ANDROID_HOME/licenses
-
 dependencies:
     pre:
         - sudo chmod +x gradlew
