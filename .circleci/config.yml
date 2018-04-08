@@ -19,5 +19,5 @@ jobs:
 
       - run:
           name: Download Dependencies
-          command: ./gradlew androidDependencies
-                 
+          command: sudo ANDROID_HOME=/usr/local/android-sdk-linux ./gradlew androidDependencies
+          
