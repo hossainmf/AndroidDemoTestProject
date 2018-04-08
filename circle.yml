@@ -25,20 +25,8 @@ dependencies:
 
 # Comment the test stuff out (or remove it) if you don't need it.
 test:
-  pre:
-    - emulator -avd circleci-android26 -no-window:
-          background: true
-          parallel: true
-    - circle-android wait-for-boot
-    # unlock emulator
-    - sleep 30
-    - adb shell input keyevent 82
-#
   override:
 #    - ./gradlew clean assemble
     # This will run the tests:
    - ./gradlew assemble connectedDebugAndroidTest -PdisablePreDex --console=plain --info
 
-  post:
-      - cp -r app/build/outputs $CIRCLE_ARTIFACTS
-      - cp -r app/build/outputs/androidTest-results/connected/ $CIRCLE_TEST_REPORTS
