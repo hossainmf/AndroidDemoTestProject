@@ -1,50 +1,31 @@
-      general:
-      		artifacts:
-          		- /home/jaser/AndroidStudioProjects/AndroidDemoTestProject/app/build/outputs
+general:
+    artifacts:
+        - /home/jaser/AndroidStudioProjects/AndroidDemoTestProject/app/build/outputs
 
-  	  machine:
-      		environment:
-          		ANDROID_HOME: /usr/local/android-sdk-linux
-          		ADB_INSTALL_TIMEOUT: 240
-          
-  	  dependencies:
-      		pre:
-          		- sudo chmod +x gradlew
-          		- echo y | android update sdk --no-ui --all --filter "tools,android-26,build-tools-27.0.3,platform-tools,extra-android-m2repository,extra-android-support,extra-google-m2repository,extra-google-google_play_services"
-         			- sudo echo yes | android update sdk --no-ui --all
-      		cache_directories:
-          		#- /usr/local/android-sdk-linux/tools
-          		#- /usr/local/android-sdk-linux/build-tools/25.0.2
-      		post:
-         	 		# Create the android emulator
-         			- echo n | android create avd -n test_android_17 -f -t android-17
-          		#  [HINT] Circle-CI already have built-in emulator (circleci-android22), but it's so heavy.
-          		# Make a SD Card image file for the android emulator
-          		- mksdcard -l e 128M sdcard.img
-           
+machine:
+    environment:
+        ANDROID_HOME: /usr/local/android-sdk-linux
+        ADB_INSTALL_TIMEOUT: 240
 
-      		override:
-             	- sudo ANDROID_HOME=/usr/local/android-sdk-linux ./gradlew dependencies 
+checkout:
+    post: - cp -r licenses/. $ANDROID_HOME/licenses
 
-  		# Comment the test stuff out (or remove it) if you don't need it.
-  	  test:
-   		    pre:
-      			#- emulator -avd circleci-android26 -no-window:
-     			    - emulator -avd test_android_17 -no-audio -no-boot-anim -no-window -sdcard sdcard.img:
 
-           			background: true
-            			parallel: true
-            
-      			  - circle-android wait-for-boot
-     			 # unlock emulator
-    		      - sleep 30
-     		      - adb shell input keyevent 82
-  #
-    		  override:
-  #    			- ./gradlew clean assemble
-      			# This will run the tests:
-    			  - ./gradlew assemble connectedDebugAndroidTest -PdisablePreDex --console=plain --info
+dependencies:
+    pre:
+        - sudo chmod +x gradlew
+        - echo y | android update sdk --no-ui --all --filter "tools,android-25,build-tools-25.0.2,platform-tools,extra-android-m2repository,extra-android-support,extra-google-m2repository,extra-google-google_play_services"
+    cache_directories:
+        #- /usr/local/android-sdk-linux/tools
+        #- /usr/local/android-sdk-linux/build-tools/25.0.2
 
-    		  post:
-        			#- cp -r app/build/outputs $CIRCLE_ARTIFACTS
-       			#- cp -r app/build/outputs/androidTest-results/connected/ $CIRCLE_TEST_REPORTS
+    override:
+            - sudo ANDROID_HOME=/usr/local/android-sdk-linux ./gradlew dependencies
+
+# Comment the test stuff out (or remove it) if you don't need it.
+test:
+  
+  override:
+#    - ./gradlew clean assemble
+    # This will run the tests:
+   - ./gradlew assemble connectedDebugAndroidTest -PdisablePreDex --console=plain --info
