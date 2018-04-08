@@ -13,11 +13,11 @@ jobs:
 
     steps:
       - checkout
-        - run:
-            name: Download Dependencies
-            command: chmod +x gradlew
+      - run:
+          name: Download Dependencies
+          command: chmod +x gradlew
 
-        - run:
-            name: Download Dependencies
-            command: sudo ./gradlew dependencies
+      - run:
+          name: Download Dependencies
+          command: sudo ./gradlew dependencies
                  
