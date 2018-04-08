@@ -15,4 +15,4 @@ jobs:
       - checkout
       - run:
           name: Download Dependencies
-          command: sudo ANDROID_HOME=/usr/local/android-sdk-linux ./gradlew androidDependencies
+          command: ./gradlew dependencies
