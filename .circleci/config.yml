@@ -1,6 +1,6 @@
 Version: 2
 jobs:
-  builds:
+  build:
     docker:
       # specify the version you desire here
       - image: circleci/openjdk:8-jdk
@@ -27,3 +27,6 @@ jobs:
       - run: sleep 30
       - run: adb shell input keyevent 82
       - run: - ./gradlew assemble connectedDebugAndroidTest -PdisablePreDex --console=plain --info
+
+  
+
