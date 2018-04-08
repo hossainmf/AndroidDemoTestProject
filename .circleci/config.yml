@@ -14,6 +14,6 @@ jobs:
       ADB_INSTALL_TIMEOUT: 240
     
     steps:
-      #- run: sudo chmod +x gradlew
+      - run: sudo chmod +x gradlew
       - run: echo y | android update sdk --no-ui --all --filter "tools,android-26,build-tools-27.0.3,platform-tools,extra-android-m2repository,extra-android-support,extra-google-m2repository,extra-google-google_play_services"
       - run: sudo echo yes | android update sdk --no-ui --all
