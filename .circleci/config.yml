@@ -34,12 +34,17 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
-      - run: gradle dependencies
+      - run:
+        pre:
+          - sudo chmod +x gradlew
+          - touch app/google-services.json
+          - echo y | android update sdk --no-ui --all --filter "tools,android-26,build-tools-27.0.3,platform-tools,extra-android-m2repository,extra-android-support,extra-google-m2repository,extra-google-google_play_services"
+          - sudo echo yes | android update sdk --no-ui --all
+        override:
+          - sudo ANDROID_HOME=/usr/local/android-sdk-linux ./gradlew dependencies
 
       - save_cache:
-          paths:
-            - ~/.gradle
-          key: v1-dependencies-{{ checksum "build.gradle" }}
+          
    
 
 
