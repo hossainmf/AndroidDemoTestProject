@@ -1,8 +1,4 @@
-  Version: 2
-  jobs:
-    build: 
-
-  	  general:
+      general:
       		artifacts:
           		- /home/jaser/AndroidStudioProjects/AndroidDemoTestProject/app/build/outputs
 
