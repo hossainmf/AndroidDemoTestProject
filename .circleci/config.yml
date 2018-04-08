@@ -1,4 +1,4 @@
-Version: 2
+version: 2
 jobs:
   build:
     docker:
@@ -16,17 +16,4 @@ jobs:
       - run: sudo chmod +x gradlew
       - run: echo y | android update sdk --no-ui --all --filter "tools,android-26,build-tools-27.0.3,platform-tools,extra-android-m2repository,extra-android-support,extra-google-m2repository,extra-google-google_play_services"
       - run: sudo echo yes | android update sdk --no-ui --all
-      - run: sudo ANDROID_HOME=/usr/local/android-sdk-linux ./gradlew dependencies
-
-      - run: emulator -avd circleci-android22 -no-window:
-          background: true
-          parallel: true
-
-      - run: circle-android wait-for-boot
-           # unlock emulator
-      - run: sleep 30
-      - run: adb shell input keyevent 82
-      - run: - ./gradlew assemble connectedDebugAndroidTest -PdisablePreDex --console=plain --info
-
-  
-
+     
