@@ -7,16 +7,16 @@ machine:
         ANDROID_HOME: /usr/local/android-sdk-linux
         ADB_INSTALL_TIMEOUT: 240
         
-checkout:
-    post:
-        - sudo cp -r licenses/. $ANDROID_HOME/licenses
+#checkout:
+    #post:
+        #- sudo cp -r licenses/. $ANDROID_HOME/licenses
 
 dependencies:
     pre:
         - sudo chmod +x gradlew
-        - sudo echo yes | android update sdk --no-ui --all
         - touch app/google-services.json
-        #- echo y | android update sdk --no-ui --all --filter "tools,android-25,build-tools-25.0.2,platform-tools,extra-android-m2repository,extra-android-support,extra-google-m2repository,extra-google-google_play_services"
+        - echo y | android update sdk --no-ui --all --filter "tools,android-26,build-tools-27.0.3,platform-tools,extra-android-m2repository,extra-android-support,extra-google-m2repository,extra-google-google_play_services"
+        - sudo echo yes | android update sdk --no-ui --all
     cache_directories:
         #- /usr/local/android-sdk-linux/tools
         #- /usr/local/android-sdk-linux/build-tools/25.0.2
