@@ -1,12 +1,11 @@
 general:
     artifacts:
-        - /home/jaser/AndroidStudioProjects/AndroidDemo-master/app/build/outputs/apk
+        - /home/jaser/AndroidStudioProjects/AndroidDemoTestProject/app/build/outputs
 
 machine:
     environment:
-        ANDROID_HOME: /home/jaser/Android/Sdk
+        ANDROID_HOME: /usr/local/android-sdk-linux
         ADB_INSTALL_TIMEOUT: 240
-        GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx3072M -XX:+HeapDumpOnOutOfMemoryError"'
 
 dependencies:
     pre:
@@ -18,7 +17,7 @@ dependencies:
         #- /usr/local/android-sdk-linux/build-tools/25.0.2
 
     override:
-            - sudo ANDROID_HOME=/home/jaser/Android/Sdk ./gradlew dependencies
+            - sudo ANDROID_HOME=/usr/local/android-sdk-linux ./gradlew dependencies
 
 # Comment the test stuff out (or remove it) if you don't need it.
 test:
