@@ -1,4 +1,4 @@
-version: 2
+
 
 general:
     artifacts:
@@ -22,6 +22,13 @@ dependencies:
     cache_directories:
         #- /usr/local/android-sdk-linux/tools
         #- /usr/local/android-sdk-linux/build-tools/25.0.2
+    post:
+        # Create the android emulator
+        - echo n | android create avd -n test_android_17 -f -t android-17
+        #  [HINT] Circle-CI already have built-in emulator (circleci-android22), but it's so heavy.
+        # Make a SD Card image file for the android emulator
+        - mksdcard -l e 128M sdcard.img
+         
 
     override:
             - sudo ANDROID_HOME=/usr/local/android-sdk-linux ./gradlew dependencies
@@ -29,9 +36,12 @@ dependencies:
 # Comment the test stuff out (or remove it) if you don't need it.
 test:
   pre:
-    - emulator -avd circleci-android26 -no-window:
+    #- emulator -avd circleci-android26 -no-window:
+    - emulator -avd test_android_17 -no-audio -no-boot-anim -no-window -sdcard sdcard.img:
+
           background: true
           parallel: true
+          
     - circle-android wait-for-boot
     # unlock emulator
     - sleep 30
