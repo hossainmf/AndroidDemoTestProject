@@ -9,7 +9,7 @@ machine:
         
 checkout:
     post:
-        - cp -r licenses/. $ANDROID_HOME/licenses
+        - sudo cp -r licenses/. $ANDROID_HOME/licenses
 
 dependencies:
     pre:
