@@ -7,7 +7,7 @@ dependencies:
 test:
   override:
     # start the emulator
-    - emulator -avd circleci-android24 -no-window:
+    - emulator -avd circleci-android22 -no-window:
         background: true
         parallel: true
     # wait for it to have booted
@@ -15,6 +15,6 @@ test:
     # run tests  against the emulator.
     - ./gradlew connectedAndroidTest
     # copy the build outputs to artifacts
-    - cp -r my-project/build/outputs $CIRCLE_ARTIFACTS
+    - cp -r $CIRCLE_ARTIFACTS
     # copy the test results to the test results directory.
-    - cp -r my-project/build/outputs/androidTest-results/* $CIRCLE_TEST_REPORTS
+    - cp -r $CIRCLE_TEST_REPORTS
