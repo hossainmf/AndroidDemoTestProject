@@ -1,3 +1,6 @@
+dependencies:
+    pre:
+        - sudo chmod +x gradlew
 test:
   override:
     # start the emulator
